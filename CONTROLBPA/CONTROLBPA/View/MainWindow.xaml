@@ -1,0 +1,115 @@
+﻿<Window x:Class="CONTROLBPA.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    xmlns:controlbpa="clr-namespace:CONTROLBPA"
+    Title="CONTROL® Baseline Configuration Analyzer" 
+    Icon="/Assets/Images/kci9new.ico"
+    Height="650" Width="925">
+    <Grid >
+        <Grid.Resources>
+            <Style x:Key="HyperlinkLikeButton" TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <ControlTemplate.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextDecorations" Value="Underline" />
+                                        </Style>
+                                    </ControlTemplate.Resources>
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.ColumnSpan="2">
+            <Border Grid.ColumnSpan="2"
+                BorderBrush="Black" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" />
+            <Label Content="CONTROL® Baseline Configuration Analyzer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        </Grid>
+        <Border Grid.Row="1" Grid.Column="0" 
+                BorderBrush="Black" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" >
+            <StackPanel Orientation="Vertical">
+
+                <Button x:Name="ButtonHome" Width="140" Margin="10,10,0,0" HorizontalAlignment="Left" Style="{StaticResource HyperlinkLikeButton}" IsEnabled="{Binding Home}" Command="{Binding HomeCommand}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image HorizontalAlignment="Left" Width="16"
+                               Height="16"
+                               Margin="3" 
+                               Source="/Assets/Images/SmallBox.png" />
+                        <TextBlock Margin="4,3,0,0" FontSize="12">Home</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ButtonParamters" Width="140" Margin="10,10,0,0" HorizontalAlignment="Left" Style="{StaticResource HyperlinkLikeButton}" IsEnabled="{Binding EnterParams}" Command="{Binding Path=StartCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image HorizontalAlignment="Left" Width="16"
+                               Height="16"
+                               Margin="3" 
+                               Source="/Assets/Images/SmallBox.png" />
+                        <TextBlock Margin="4,3,0,0" FontSize="12">Enter Parameters</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ButtonReport" Width="140" Margin="10,10,0,0" HorizontalAlignment="Left" Style="{StaticResource HyperlinkLikeButton}" IsEnabled="{Binding ViewReport}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image HorizontalAlignment="Left" Width="16"
+                               Height="16"
+                               Margin="3" 
+                               Source="/Assets/Images/SmallBox.png" />
+                        <TextBlock Margin="4,3,0,0" FontSize="12">View Report</TextBlock>
+                    </StackPanel>
+                </Button>
+
+
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" Grid.Column="1" Visibility="{Binding HomeVisible}">
+            <controlbpa:HomePage></controlbpa:HomePage>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" Visibility="{Binding ParametersVisible}">
+            <controlbpa:ParametersPage></controlbpa:ParametersPage>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" Visibility="{Binding ProgressVisible}">
+            <controlbpa:ProgressPage></controlbpa:ProgressPage>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" Visibility="{Binding ReportVisible}">
+            <controlbpa:ReportPage></controlbpa:ReportPage>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                <TextBlock Text="®2021 KCI Computing, Inc."></TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
